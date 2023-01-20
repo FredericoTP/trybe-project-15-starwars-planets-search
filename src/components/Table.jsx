@@ -4,8 +4,7 @@ import FilterContext from '../context/FilterContext';
 
 function Table() {
   const { planets, keys } = useContext(PlanetsContext);
-  const { filterName } = useContext(FilterContext);
-
+  const { filterName, click } = useContext(FilterContext);
   return (
     <table>
       <thead>
@@ -17,6 +16,14 @@ function Table() {
         {
           planets.filter((planet) => (
             planet.name.toLowerCase()).includes(filterName.value.toLowerCase()))
+            .filter((item) => (
+              (click.value[1] === 'maior que' && item[click.value[0]] > +(click.value[2]))
+               || ((click.value[1] === 'menor que')
+                && item[click.value[0]] < +(click.value[2]))
+               || (click.value[1] === 'igual a'
+               && item[click.value[0]] === click.value[2])
+               || ((click.value === ''))
+            ))
             .map((planet) => (
               <tr key={ planet.name }>
                 {
