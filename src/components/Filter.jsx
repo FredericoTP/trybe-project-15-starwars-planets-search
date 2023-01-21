@@ -135,6 +135,7 @@ function Filter() {
           <div key={ index } data-testid="filter">
             <p>{ `${item[0]} ${item[1]} ${item[2]}` }</p>
             <button
+              data-testid="button-remove"
               type="button"
               onClick={ () => clickBtnRemove(item) }
             >
