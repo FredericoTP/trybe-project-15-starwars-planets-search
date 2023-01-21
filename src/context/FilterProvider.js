@@ -38,5 +38,8 @@ function FilterProvider({ children }) {
 export default FilterProvider;
 
 FilterProvider.propTypes = {
-  children: PropTypes.elementType.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
