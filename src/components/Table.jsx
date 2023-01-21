@@ -4,7 +4,8 @@ import FilterContext from '../context/FilterContext';
 
 function Table() {
   const { planets, keys } = useContext(PlanetsContext);
-  const { filterName, click } = useContext(FilterContext);
+  const { filterName, click, clickSort } = useContext(FilterContext);
+  const NUMBER = -1;
 
   function filterMore(item) {
     const { value } = click;
@@ -32,6 +33,24 @@ function Table() {
     return item;
   }
 
+  function sortFilter(a, b) {
+    if (clickSort.value.column && clickSort.value.sort === 'ASC') {
+      if (!a[clickSort.value.column].includes('unknown')
+      && b[clickSort.value.column].includes('unknown')) {
+        return NUMBER;
+      }
+      if (a[clickSort.value.column].includes('unknown')
+      && !b[clickSort.value.column].includes('unknown')) {
+        return 1;
+      }
+      return a[clickSort.value.column] - b[clickSort.value.column];
+    }
+    if (clickSort.value.column && clickSort.value.sort === 'DESC') {
+      return b[clickSort.value.column] - a[clickSort.value.column];
+    }
+    return a;
+  }
+
   return (
     <table>
       <thead>
@@ -44,20 +63,28 @@ function Table() {
           planets.filter((planet) => (
             planet.name.toLowerCase()).includes(filterName.value.toLowerCase()))
             .filter((item) => filterMore(item))
-            // .filter((item) => (
-            //   (click.value[1] === 'maior que' && item[click.value[0]] > +(click.value[2]))
-            //    || ((click.value[1] === 'menor que')
-            //     && item[click.value[0]] < +(click.value[2]))
-            //    || (click.value[1] === 'igual a'
-            //    && item[click.value[0]] === click.value[2])
-            //    || ((click.value === ''))
-            // ))
+            .sort((a, b) => sortFilter(a, b))
             .map((planet) => (
               <tr key={ planet.name }>
                 {
-                  Object.values(planet).map((item, index) => (
-                    <td key={ `${item}${index}` }>{item}</td>
-                  ))
+                  Object.values(planet).map((item, index) => {
+                    if (planet.name === item) {
+                      return (
+                        <td
+                          data-testid="planet-name"
+                          key={ `${item}${index}` }
+                        >
+                          {item}
+                        </td>
+                      );
+                    } return (
+                      <td
+                        key={ `${item}${index}` }
+                      >
+                        {item}
+                      </td>
+                    );
+                  })
                 }
               </tr>))
         }

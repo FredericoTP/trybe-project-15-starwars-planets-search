@@ -3,6 +3,10 @@ import { useState } from 'react';
 function useClick(initialValue) {
   const [value, setValue] = useState(initialValue);
 
+  function handleClickSort(info) {
+    setValue(info);
+  }
+
   function handleClickAdd(info) {
     setValue([...value, info]);
   }
@@ -21,6 +25,7 @@ function useClick(initialValue) {
     handleClickAdd,
     handleClickRemove,
     handleClickRemoveAll,
+    handleClickSort,
   };
 }
 
