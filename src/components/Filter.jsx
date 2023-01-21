@@ -3,8 +3,15 @@ import FilterContext from '../context/FilterContext';
 
 function Filter() {
   const {
-    filterName, column, columnFilter, comparisonFilter, valueFilter, click,
+    filterName, columnFilter, comparisonFilter, valueFilter, click,
   } = useContext(FilterContext);
+
+  function clickBtn() {
+    click.handleClickAdd([
+      columnFilter.value, comparisonFilter.value, valueFilter.value]);
+    columnFilter.selectOptions(columnFilter.value);
+  }
+
   return (
     <div>
       <div>
@@ -21,8 +28,10 @@ function Filter() {
         <select
           data-testid="column-filter"
           onChange={ columnFilter.handleChange }
+          disabled={ columnFilter.value === undefined }
         >
-          {column.map((item) => <option key={ item } value={ item }>{item}</option>)}
+          {columnFilter.options
+            .map((item) => <option key={ item } value={ item }>{item}</option>)}
         </select>
 
         <select
@@ -45,10 +54,7 @@ function Filter() {
         <button
           data-testid="button-filter"
           type="button"
-          onClick={
-            () => click.handleClickAdd([
-              columnFilter.value, comparisonFilter.value, valueFilter.value])
-          }
+          onClick={ () => clickBtn() }
         >
           Add Filtro
         </button>
