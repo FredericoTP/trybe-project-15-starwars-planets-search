@@ -37,7 +37,7 @@ describe('Teste App', () => {
     expect(comparisonFilter).toBeInTheDocument();
     expect(comparisonFilter).toHaveValue('maior que');
     expect(valueFilter).toBeInTheDocument();
-    expect(valueFilter).toHaveValue(0);
+    expect(valueFilter).toHaveValue(null);
     expect(btnFilter).toBeInTheDocument();
     expect(btnRemoveFilters).toBeInTheDocument();
     expect(columnSort).toBeInTheDocument();
@@ -78,14 +78,84 @@ describe('Teste App', () => {
     const valueFilter = await screen.findByTestId("value-filter");
     const btnFilter = await screen.findByTestId("button-filter");
 
+    expect(columnFilter).toHaveLength(5);
+
     act(() => {
       userEvent.selectOptions(columnFilter, 'surface_water');
+      expect(columnFilter).toHaveValue('surface_water');
       userEvent.selectOptions(comparisonFilter, 'menor que');
       userEvent.type(valueFilter, '41');
       userEvent.click(btnFilter);
-    })
+    });
+
+    expect(columnFilter).toHaveValue('population');
+    expect(columnFilter).toHaveLength(4);
+    expect(comparisonFilter).toHaveValue('menor que');
+    expect(valueFilter).toHaveValue(null);
 
     const planets = await screen.findAllByTestId('planet-name');
     expect(planets).toHaveLength(7);
   });
+
+  test('verifica se é possível adicionar mais de um filtro numérico', async () => {
+    await act(() => render(<App />));
+
+    const columnFilter = await screen.findByTestId("column-filter");
+    const comparisonFilter = await screen.findByTestId("comparison-filter");
+    const valueFilter = await screen.findByTestId("value-filter");
+    const btnFilter = await screen.findByTestId("button-filter");
+
+    act(() => {
+      userEvent.selectOptions(columnFilter, 'surface_water');
+      userEvent.selectOptions(comparisonFilter, 'maior que');
+      userEvent.type(valueFilter, '0');
+      userEvent.click(btnFilter);
+    });
+
+    const planets = await screen.findAllByTestId('planet-name');
+    expect(planets).toHaveLength(8);
+
+    act(() => {
+      userEvent.selectOptions(columnFilter, 'rotation_period');
+      userEvent.selectOptions(comparisonFilter, 'menor que');
+      userEvent.type(valueFilter, '27');
+      userEvent.click(btnFilter);
+    });
+
+    const planetsTwo = await screen.findAllByTestId('planet-name');
+    expect(planetsTwo).toHaveLength(7);
+
+    act(() => {
+      userEvent.selectOptions(columnFilter, 'orbital_period');
+      userEvent.selectOptions(comparisonFilter, 'menor que');
+      userEvent.type(valueFilter, '4000');
+      userEvent.click(btnFilter);
+    });
+
+    const planetsThree = await screen.findAllByTestId('planet-name');
+    console.log(planetsThree);
+    expect(planetsThree).toHaveLength(6);
+
+    act(() => {
+      userEvent.selectOptions(columnFilter, 'diameter');
+      userEvent.selectOptions(comparisonFilter, 'maior que');
+      userEvent.type(valueFilter, '8000');
+      userEvent.click(btnFilter);
+    });
+
+    const planetsFour = await screen.findAllByTestId('planet-name');
+    expect(planetsFour).toHaveLength(4);
+
+    act(() => {
+      userEvent.selectOptions(columnFilter, 'population');
+      userEvent.selectOptions(comparisonFilter, 'igual a');
+      userEvent.type(valueFilter, '200000');
+      userEvent.click(btnFilter);
+    });
+
+    const planetsFive = await screen.findAllByTestId('planet-name');
+    expect(planetsFive).toHaveLength(1);
+    expect(planetsFive[0]).toHaveTextContent('Tatooine');
+    expect(columnFilter).toBeDisabled();
+  })
 });

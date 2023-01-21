@@ -41,6 +41,7 @@ function useFilterInput(initialValue) {
     options,
     columnDel,
     value,
+    setValue,
     handleChange,
     selectOptions,
     setOptions,

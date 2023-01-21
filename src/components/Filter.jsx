@@ -13,6 +13,7 @@ function Filter() {
     click.handleClickAdd([
       columnFilter.value, comparisonFilter.value, valueFilter.value]);
     columnFilter.selectOptions(columnFilter.value);
+    valueFilter.setValue('');
   }
 
   function clickBtnRemoveAll() {

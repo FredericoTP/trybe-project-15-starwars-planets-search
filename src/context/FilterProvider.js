@@ -9,7 +9,7 @@ function FilterProvider({ children }) {
   const comparisonFilter = useFilterInput('maior que');
   const sortFilter = useFilterInput('population');
   const radioFilter = useFilterInput('');
-  const valueFilter = useFilterInput(0);
+  const valueFilter = useFilterInput('');
   const click = useClick([]);
   const clickSort = useClick([]);
   const column = [
