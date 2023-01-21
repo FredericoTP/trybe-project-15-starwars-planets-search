@@ -12,6 +12,20 @@ function Filter() {
     columnFilter.selectOptions(columnFilter.value);
   }
 
+  function clickBtnRemoveAll() {
+    click.handleClickRemoveAll();
+    if (columnFilter.value === undefined) {
+      columnFilter.returnAllSelectOptions();
+    } else {
+      columnFilter.returnAllSelectOptions(columnFilter.value);
+    }
+  }
+
+  function clickBtnRemove(item) {
+    click.handleClickRemove(item);
+    columnFilter.returnSelect(item, columnFilter.value);
+  }
+
   return (
     <div>
       <div>
@@ -55,16 +69,25 @@ function Filter() {
           data-testid="button-filter"
           type="button"
           onClick={ () => clickBtn() }
+          disabled={ columnFilter.value === undefined }
         >
           Add Filtro
+        </button>
+        <button
+          data-testid="button-remove-filters"
+          type="button"
+          onClick={ clickBtnRemoveAll }
+        >
+          Remover todos
         </button>
       </div>
       <div>
         {click.value.length > 0 && click.value.map((item, index) => (
-          <div key={ index }>
+          <div key={ index } data-testid="filter">
             <p>{ `${item[0]} ${item[1]} ${item[2]}` }</p>
             <button
               type="button"
+              onClick={ () => clickBtnRemove(item) }
             >
               Remover
             </button>

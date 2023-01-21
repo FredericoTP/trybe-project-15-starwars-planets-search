@@ -8,15 +8,19 @@ function useClick(initialValue) {
   }
 
   function handleClickRemove(info) {
-    const array = value;
-    array.splice(array.indexOf(info), 1);
-    setValue([array]);
+    const array = value.filter((item) => item[0] !== info[0]);
+    setValue(array);
+  }
+
+  function handleClickRemoveAll() {
+    setValue([]);
   }
 
   return {
     value,
     handleClickAdd,
     handleClickRemove,
+    handleClickRemoveAll,
   };
 }
 

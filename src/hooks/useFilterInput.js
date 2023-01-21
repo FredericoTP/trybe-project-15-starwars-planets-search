@@ -8,15 +8,33 @@ function useFilterInput(initialValue) {
   const [value, setValue] = useState(initialValue);
   const [options, setOptions] = useState(column);
 
-  const handleChange = (event) => {
+  function handleChange(event) {
     setValue(event.target.value);
-  };
+  }
 
-  const selectOptions = (string) => {
+  function selectOptions(string) {
     const array = options.filter((item) => item !== string);
     setOptions(array);
     setValue(array[0]);
-  };
+  }
+
+  function returnAllSelectOptions(string = column[0]) {
+    setOptions(column);
+    setValue(string);
+  }
+
+  function returnSelect(array, string) {
+    const newArray = options;
+    newArray.push(array[0]);
+    const optionsValue = column.map((item) => newArray
+      .find((element) => item === element)).filter((e) => e !== undefined);
+    setOptions(optionsValue);
+    if (string !== undefined) {
+      setValue(string);
+    } else {
+      setValue(optionsValue[0]);
+    }
+  }
 
   return {
     options,
@@ -25,6 +43,8 @@ function useFilterInput(initialValue) {
     handleChange,
     selectOptions,
     setOptions,
+    returnAllSelectOptions,
+    returnSelect,
   };
 }
 
