@@ -8,7 +8,7 @@ function FilterProvider({ children }) {
   const columnFilter = useFilterInput('population');
   const comparisonFilter = useFilterInput('maior que');
   const valueFilter = useFilterInput(0);
-  const click = useClick('');
+  const click = useClick([]);
   const column = [
     'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water',
   ];

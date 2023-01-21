@@ -46,12 +46,24 @@ function Filter() {
           data-testid="button-filter"
           type="button"
           onClick={
-            () => click.handleClick([
+            () => click.handleClickAdd([
               columnFilter.value, comparisonFilter.value, valueFilter.value])
           }
         >
           Add Filtro
         </button>
+      </div>
+      <div>
+        {click.value.length > 0 && click.value.map((item, index) => (
+          <div key={ index }>
+            <p>{ `${item[0]} ${item[1]} ${item[2]}` }</p>
+            <button
+              type="button"
+            >
+              Remover
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );
