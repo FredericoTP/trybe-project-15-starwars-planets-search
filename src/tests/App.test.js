@@ -37,7 +37,7 @@ describe('Teste App', () => {
     expect(comparisonFilter).toBeInTheDocument();
     expect(comparisonFilter).toHaveValue('maior que');
     expect(valueFilter).toBeInTheDocument();
-    expect(valueFilter).toHaveValue(null);
+    expect(valueFilter).toHaveValue(0);
     expect(btnFilter).toBeInTheDocument();
     expect(btnRemoveFilters).toBeInTheDocument();
     expect(columnSort).toBeInTheDocument();
@@ -133,7 +133,6 @@ describe('Teste App', () => {
     });
 
     const planetsThree = await screen.findAllByTestId('planet-name');
-    console.log(planetsThree);
     expect(planetsThree).toHaveLength(6);
 
     act(() => {
