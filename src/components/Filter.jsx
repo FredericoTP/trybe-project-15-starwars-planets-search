@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useContext } from 'react';
 import FilterContext from '../context/FilterContext';
+import '../style/Filter.css';
 
 function Filter() {
   const {
@@ -31,9 +33,12 @@ function Filter() {
   }
 
   return (
-    <div>
-      <div>
+    <div className="filter-container">
+      <p>Filtros:</p>
+      <div className="filter-name-container">
+        <p>Nome:</p>
         <input
+          className="filter-name"
           data-testid="name-filter"
           placeholder="Nome"
           id="name-filter"
@@ -42,9 +47,11 @@ function Filter() {
           onChange={ filterName.handleChange }
         />
       </div>
-      <div>
-        <div>
+      <div className="filter-column-sort-container">
+        <div className="filter-column-container">
+          <p>Coluna:</p>
           <select
+            className="select-control"
             data-testid="column-filter"
             onChange={ columnFilter.handleChange }
             disabled={ columnFilter.value === undefined }
@@ -54,6 +61,7 @@ function Filter() {
           </select>
 
           <select
+            className="select-control"
             data-testid="comparison-filter"
             onChange={ comparisonFilter.handleChange }
           >
@@ -63,6 +71,7 @@ function Filter() {
           </select>
 
           <input
+            className="filter-name"
             data-testid="value-filter"
             placeholder="Número"
             type="number"
@@ -71,6 +80,7 @@ function Filter() {
           />
 
           <button
+            className="btn-add-remove"
             data-testid="button-filter"
             type="button"
             onClick={ () => clickBtn() }
@@ -79,6 +89,7 @@ function Filter() {
             Add Filtro
           </button>
           <button
+            className="btn-add-remove"
             data-testid="button-remove-filters"
             type="button"
             onClick={ clickBtnRemoveAll }
@@ -86,8 +97,10 @@ function Filter() {
             Remover todos
           </button>
         </div>
-        <div>
+        <div className="filter-sort-container">
+          <p>Ordenar:</p>
           <select
+            className="select-control"
             data-testid="column-sort"
             onChange={ sortFilter.handleChange }
           >
@@ -95,9 +108,9 @@ function Filter() {
               .map((item) => <option key={ item } value={ item }>{item}</option>)}
           </select>
 
-          <label htmlFor="column-sort-input-asc">
-            Ascendente
+          <div className="form-check radio-form">
             <input
+              className="form-check-input"
               data-testid="column-sort-input-asc"
               name="sort"
               id="column-sort-input-asc"
@@ -105,10 +118,14 @@ function Filter() {
               value="ASC"
               onChange={ radioFilter.handleChange }
             />
-          </label>
-          <label htmlFor="column-sort-input-desc">
-            Descendente
+            <label className="form-check-label" htmlFor="column-sort-input-asc">
+              Ascendente
+            </label>
+          </div>
+
+          <div className="form-check radio-form">
             <input
+              className="form-check-input"
               data-testid="column-sort-input-desc"
               name="sort"
               id="column-sort-input-desc"
@@ -116,9 +133,13 @@ function Filter() {
               value="DESC"
               onChange={ radioFilter.handleChange }
             />
-          </label>
+            <label className="form-check-label" htmlFor="column-sort-input-desc">
+              Descendente
+            </label>
+          </div>
 
           <button
+            className="btn-add-remove"
             data-testid="column-sort-button"
             type="button"
             onClick={ () => clickSort.handleClickSort({
