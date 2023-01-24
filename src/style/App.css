@@ -1,0 +1,11 @@
+body {
+  background-image: url('../images/sky.jpg');
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.main-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,9 +1,11 @@
 import { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 import FilterContext from '../context/FilterContext';
+import Loading from './Loading';
+import '../style/Table.css';
 
 function Table() {
-  const { planets, keys } = useContext(PlanetsContext);
+  const { planets, keys, loading } = useContext(PlanetsContext);
   const { filterName, click, clickSort } = useContext(FilterContext);
   const NUMBER = -1;
 
@@ -51,45 +53,55 @@ function Table() {
     return a;
   }
 
+  if (loading) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+  }
+
   return (
-    <table>
-      <thead>
-        <tr>
-          {keys.map((item) => <th key={ item }>{item}</th>)}
-        </tr>
-      </thead>
-      <tbody>
-        {
-          planets.filter((planet) => (
-            planet.name.toLowerCase()).includes(filterName.value.toLowerCase()))
-            .filter((item) => filterMore(item))
-            .sort((a, b) => sortFilter(a, b))
-            .map((planet) => (
-              <tr key={ planet.name }>
-                {
-                  Object.values(planet).map((item, index) => {
-                    if (planet.name === item) {
-                      return (
+    <div className="table-container">
+      <table className="table-content">
+        <thead>
+          <tr>
+            {keys.map((item) => <th key={ item }>{item}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {
+            planets.filter((planet) => (
+              planet.name.toLowerCase()).includes(filterName.value.toLowerCase()))
+              .filter((item) => filterMore(item))
+              .sort((a, b) => sortFilter(a, b))
+              .map((planet) => (
+                <tr key={ planet.name }>
+                  {
+                    Object.values(planet).map((item, index) => {
+                      if (planet.name === item) {
+                        return (
+                          <td
+                            data-testid="planet-name"
+                            key={ `${item}${index}` }
+                          >
+                            {item}
+                          </td>
+                        );
+                      } return (
                         <td
-                          data-testid="planet-name"
                           key={ `${item}${index}` }
                         >
                           {item}
                         </td>
                       );
-                    } return (
-                      <td
-                        key={ `${item}${index}` }
-                      >
-                        {item}
-                      </td>
-                    );
-                  })
-                }
-              </tr>))
-        }
-      </tbody>
-    </table>
+                    })
+                  }
+                </tr>))
+          }
+        </tbody>
+      </table>
+    </div>
   );
 }
 
