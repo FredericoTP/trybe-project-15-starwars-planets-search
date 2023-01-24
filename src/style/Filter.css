@@ -1,3 +1,4 @@
+/* stylelint-disable max-line-length */
 .filter-container {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
@@ -10,12 +11,16 @@
   width: 90%;
 }
 
+.filters {
+  width: 100%;
+}
+
 .filter-name-container {
   border: 2px solid white;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin: 0 10px;
+  margin: 0 auto;
   width: 90%;
 }
 
@@ -49,6 +54,7 @@
 .filter-column-sort-container {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
   width: 90%;
 }
 
@@ -61,11 +67,9 @@
   width: 100%;
 }
 
-.filter-container p {
-  color: white;
-  margin: 0;
-  padding: 10px;
-  text-align: center;
+.select-container {
+  margin: 0 auto;
+  width: 90%;
 }
 
 .select-control {
@@ -80,9 +84,8 @@
   color: white;
   margin: 0 auto 10px;
   padding: 5px;
-  width: 90%;
+  width: 100%;
 }
-
 
 .select-control:focus {
   background-image: linear-gradient(45deg, gray 50%, transparent 50%) , linear-gradient(135deg, transparent 50%, gray 50%) , linear-gradient(to right, #ccc, #ccc);
@@ -112,4 +115,72 @@
   color: white;
   margin: 0 auto 5px;
   width: 90%;
+}
+
+.chosen-filters-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
+}
+
+.chosen-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding: 5px 0;
+  width: 100%;
+}
+
+.button-remove {
+  background-color: white;
+  border: 2px solid gray;
+  border-radius: 10px;
+  color: black;
+  padding: 5px;
+}
+
+@media screen and ( min-width : 1024px ) {
+
+  .filter-name-container {
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .filter-name {
+    color: white;
+    margin: 10px auto;
+  }
+
+  .filter-column-sort-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .filter-column-container, .filter-sort-container {
+    width: 47%;
+  }
+}
+
+@media screen and ( min-width : 1500px ) {
+
+  .filters {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .filter-name-container {
+    flex-direction: column;
+    width: 48%;
+  }
+
+  .filter-column-sort-container {
+    width: 48%;
+  }
+
+
 }

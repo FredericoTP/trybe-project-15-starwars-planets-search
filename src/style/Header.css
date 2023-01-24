@@ -6,4 +6,19 @@
 
 .header-img {
   border-radius: 50px;
+  width: 150px;
+}
+
+@media screen and ( min-width : 700px ) {
+
+  .header-img {
+    width: 250px;
+  }
+}
+
+@media screen and ( min-width : 1024px ) {
+
+  .header-img {
+    width: 350px;
+  }
 }
