@@ -1,9 +1,10 @@
 import { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 import FilterContext from '../context/FilterContext';
+import Loading from './Loading';
 
 function Table() {
-  const { planets, keys } = useContext(PlanetsContext);
+  const { planets, keys, loading } = useContext(PlanetsContext);
   const { filterName, click, clickSort } = useContext(FilterContext);
   const NUMBER = -1;
 
@@ -49,6 +50,14 @@ function Table() {
       return b[clickSort.value.column] - a[clickSort.value.column];
     }
     return a;
+  }
+
+  if (loading) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   return (

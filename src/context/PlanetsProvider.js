@@ -4,7 +4,7 @@ import PlanetsContext from './PlanetsContext';
 import useFetch from '../hooks/useFetch';
 
 function PlanetsProvider({ children }) {
-  const { planets, fetchApi } = useFetch('https://swapi.dev/api/planets');
+  const { planets, fetchApi, loading } = useFetch('https://swapi.dev/api/planets');
 
   let keys = [];
 
@@ -21,7 +21,7 @@ function PlanetsProvider({ children }) {
   }
 
   return (
-    <PlanetsContext.Provider value={ { planets, keys } }>
+    <PlanetsContext.Provider value={ { planets, keys, loading } }>
       {children}
     </PlanetsContext.Provider>
   );
