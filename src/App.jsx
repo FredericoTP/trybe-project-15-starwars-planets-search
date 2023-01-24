@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './style/App.css';
 import Header from './components/Header';
 import PlanetsProvider from './context/PlanetsProvider';
 import FilterProvider from './context/FilterProvider';
@@ -10,9 +10,11 @@ function App() {
   return (
     <PlanetsProvider>
       <FilterProvider>
-        <Header />
-        <Filter />
-        <Table />
+        <div className="main-container">
+          <Header />
+          <Filter />
+          <Table />
+        </div>
       </FilterProvider>
     </PlanetsProvider>
   );

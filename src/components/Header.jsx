@@ -1,7 +1,10 @@
+import image from '../images/title.png';
+import '../style/Header.css';
+
 function Header() {
   return (
     <header>
-      <h1>Star Wars</h1>
+      <img src={ image } alt="title" />
     </header>
   );
 }
