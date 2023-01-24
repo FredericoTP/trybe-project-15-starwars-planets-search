@@ -3,8 +3,12 @@ import '../style/Header.css';
 
 function Header() {
   return (
-    <header>
-      <img src={ image } alt="title" />
+    <header className="header-container">
+      <img
+        className="header-img"
+        src={ image }
+        alt="title"
+      />
     </header>
   );
 }
