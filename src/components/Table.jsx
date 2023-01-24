@@ -55,7 +55,7 @@ function Table() {
 
   if (loading) {
     return (
-      <div>
+      <div className="loading-screen">
         <Loading />
       </div>
     );

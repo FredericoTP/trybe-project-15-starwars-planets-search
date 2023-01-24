@@ -1,3 +1,7 @@
+.loading-screen {
+  display: flex;
+}
+
 .table-container {
   background-color: rgba(0, 0, 0, 0.7);
   margin: 30px 0;
