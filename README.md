@@ -57,7 +57,7 @@ Nesse projeto foi desenvolvida uma aplicação onde é possível ver uma lista c
 
 ## 100% :heavy_check_mark:
 
-![Project-TrybeWallet-Grade]()
+![Project-StarWars-Planets-Search-Grade](https://raw.githubusercontent.com/FredericoTP/trybe-project-15-starwars-planets-search/main/images/starwars-grade.png)
 
 </details>
 <br />
@@ -69,8 +69,6 @@ Nesse projeto foi desenvolvida uma aplicação onde é possível ver uma lista c
 
 </summary>
 
-![Project-TrybeWallet-Preview1]()
- 
-![Project-TrybeWallet-Preview2]()
+![Project-StarWars-Planets-Search-Preview1](https://raw.githubusercontent.com/FredericoTP/trybe-project-15-starwars-planets-search/main/images/starwars-preview1.png)
  
 </details>
